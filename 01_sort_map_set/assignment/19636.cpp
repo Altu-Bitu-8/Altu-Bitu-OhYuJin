@@ -1,52 +1,62 @@
 #include <iostream>
-#include <map>
 #include <cmath>
 
 using namespace std;
 
-void withoutChange(map<string, int>& m) {
-	m["W_without"] += (m["I"] - (m["I0"] + m["A"])) * m["D"];
-}
 
-void withChange(map<string, int>& m) {
-	for (int i = 0; i < m["D"]; i++) {
-		m["delta"] = m["I"] - (m["I_with"] + m["A"]);
-		m["W_with"] += m["delta"];
+struct DietState {
+	int weight, bmr;
+	
+	void dietWithout(int eat, int a, int d) {
+		weight += (eat - (bmr + a)) * d;
+	}
 
-		if (abs(m["delta"]) > m["T"]) {
-			m["I_with"] += floor(m["delta"] / 2.0);
+
+	void dietWith(int eat, int a, int d, int t) {
+		int delta;
+		for (int i = 0; i < d; i++) {
+			delta = eat - (bmr + a);
+			weight += delta;
+	
+			if (abs(delta) > t) {
+				bmr += floor(delta / 2.0);
+			}
 		}
 	}
-}
+};
+
+
 
 int main() {
-	map<string, int> m;
-	m["A0"] = 0; 
-	cin >> m["W0"] >> m["I0"] >> m["T"];
-	cin >> m["D"] >> m["I"] >> m["A"];
-	//초기값 설정하여 코드 오류로 계산이 안되어 0 나오는 경우 없도록
-	m["W_without"] = m["W0"];
-	m["W_with"] = m["W0"];
-	m["I_with"] = m["I0"];
+	
+	int W0, I0, I, A;
+	int D, T;
 
+	cin >> W0 >> I0 >> T;
+	cin >> D >> I >> A;
 
-	withoutChange(m);
-	if (m["W_without"] <= 0) {
+	DietState withoutChange = {W0, I0};
+	DietState withChange = {W0, I0};
+
+	withoutChange.dietWithout(I, A, D);
+
+	if (withoutChange.weight <= 0) {
 		cout << "Danger Diet" << '\n';
 	}
 	else {
-		cout << m["W_without"] << " " << m["I0"] << '\n';
+		cout << withoutChange.weight << " " << withoutChange.bmr << '\n';
 	}
 	
-	withChange(m);
-	if (m["W_with"] <= 0 || m["I_with"]<=0) {
+	withChange.dietWith(I, A, D, T);
+
+	if (withChange.weight <= 0 || withChange.bmr<=0) {
 		cout << "Danger Diet" << '\n';
 		return 0;
 	}
 	
-	cout << m["W_with"] << " " << m["I_with"] << " ";
+	cout << withChange.weight << " " << withChange.bmr << " ";
 	
-	if (m["I0"] - m["I_with"] > 0) cout << "YOYO";
+	if (I0 - withChange.bmr > 0) cout << "YOYO";
 	else cout << "NO";
 
 	return 0;

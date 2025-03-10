@@ -2,9 +2,10 @@
 #include <string>
 #include <set>
 
+using namespace std;
 
-int subString(const std::string& s) {
-	std::set<std::string> sub;
+int subString(const string& s) {
+	set<string> sub;
 
 	for (int i = 0; i < s.size(); i++) {
 		for (int j = 1; j <= s.size()-i; j++) {
@@ -15,10 +16,10 @@ int subString(const std::string& s) {
 
 int main() {
 
-	std::string input;
-	std::cin >> input;
+	string input;
+	cin >> input;
 
-	std::cout << subString(input);
+	cout << subString(input);
 
 	return 0;
 }

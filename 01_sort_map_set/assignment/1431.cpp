@@ -9,7 +9,8 @@ using namespace std;
 // 자리수 합 계산 함수
 int sumDigits(const string& s) {
 	int sum = 0;
-	for (int i = 0; i < s.size(); i++) { // for (char c : s)도 가능
+	int num = s.size();
+	for (int i = 0; i < num; i++) { // for (char c : s)도 가능
 		if (isdigit(s[i])) {
 			sum += s[i]-'0';
 			// int로 형변환 위해. stoi()는 char가 아닌 string 변환이기 때문에 불가
