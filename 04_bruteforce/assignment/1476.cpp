@@ -37,10 +37,10 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
 
-    int E, S, M;
-    cin >> E >> S >> M;
+    int e, s, m;
+    cin >> e >> s >> m;
 
-    cout << calYear(E, S, M);
+    cout << calYear(e, s, m);
 
     return 0;
 }

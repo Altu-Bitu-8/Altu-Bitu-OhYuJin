@@ -4,7 +4,7 @@ using namespace std;
 
 const char MIN_COL = 'A';
 const char MAX_COL = 'H';
-const char MIN_ROW = 1;
+const int MIN_ROW = 1;
 const int MAX_ROW = 8;
 
 typedef pair<char,int> p;
@@ -101,8 +101,8 @@ int main() {
     cin.tie(NULL); cout.tie(NULL);
 
     string k0, s0;
-    int N;
-    cin >> k0 >> s0 >> N;
+    int n;
+    cin >> k0 >> s0 >> n;
 
     p king;
     p stone;
@@ -112,7 +112,7 @@ int main() {
     stone.first = s0[0];
     stone.second = s0[1] - '0';
 
-    chess(king, stone, N);
+    chess(king, stone, n);
     
     cout << king.first << king.second << "\n";
     cout << stone.first << stone.second;

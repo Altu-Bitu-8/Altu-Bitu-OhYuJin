@@ -55,10 +55,10 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
 
-    int M;
-    cin >> M;
+    int m;
+    cin >> m;
 
-    calSet(M);
+    calSet(m);
 
     return 0;
 }
