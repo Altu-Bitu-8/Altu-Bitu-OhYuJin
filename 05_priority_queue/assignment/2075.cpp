@@ -12,13 +12,11 @@ int main () {
     priority_queue<int, vector<int>, greater<int>> pq;
     // min heap
 
-    for(int i=0; i<n; i++) {
-        for(int k=0; k<n; k++) {
-            cin >> x;
-            pq.push(x);
-            if(i!=0) {
-                pq.pop(); // n*n개 모두 저장시 메모리 초과
-            }
+    for(int i=0; i<n*n; i++) {
+        cin >> x;
+        pq.push(x);
+        if(pq.size()>n) {
+            pq.pop(); // n*n개 모두 저장시 메모리 초과
         }
     }
 

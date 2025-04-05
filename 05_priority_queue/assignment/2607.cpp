@@ -4,18 +4,28 @@
 using namespace std;
 const int ALPHABET=26;
 
+void countFreq(string word, vector<int>& v) {
+    for(char ch : word) {
+        v[ch - 'A']++;
+    }
+}
+
 int findSimiliar(const vector<int>& first, const vector<int>& input) {
     int diff=0;
     for(int i=0; i<ALPHABET; i++) {
+        diff += abs(first[i]-input[i]);
+
+    /*어차피 diff>2에서 걸러지므로 아래 코드 대신 한 줄로 줄일 수 있음
         if(first[i]!=input[i]) {
             if(abs(first[i]-input[i])>1) {
             // 특정 알파벳 개수 차이 2이상인 경우 불가
                 return 0;
             }
             diff++;
-        }
+        } */
+
         if(diff>2) {
-        // diff가 3이상이면 서로 한 알파벳 이상이 다른 것것
+        // diff가 3이상이면 서로 한 알파벳 이상이 다른 것
             return 0;
         }
     }
@@ -35,9 +45,7 @@ int main () {
     cin >> n >> in;
     int size = in.length();
 
-    for(char ch : in) {
-        first[ch - 'A']++;
-    }
+    countFreq(in, first);
 
     int ans=0;
 
@@ -48,9 +56,7 @@ int main () {
             continue;
         }
         vector<int> input(ALPHABET,0);
-        for(char ch : in) {
-            input[ch - 'A']++;
-        }
+        countFreq(in, input);
         ans +=findSimiliar(first, input);
     }
 
