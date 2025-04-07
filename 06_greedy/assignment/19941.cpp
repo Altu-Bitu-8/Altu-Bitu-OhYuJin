@@ -15,6 +15,7 @@ int canEatBurger(vector<char>& v, int k) {
 
         for(int j=i-k; j<=i+k; j++) {
         // 가장 왼쪽 햄버거를 먹는 것이 최적
+        // 왼쪽, 오른쪽 나누는 방식은 최선x.
             if(0<=j && j<size && v[j]=='H') {
                 ans++;
                 v[i]=v[j]='0';

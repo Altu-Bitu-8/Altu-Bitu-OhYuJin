@@ -39,6 +39,8 @@ int main() {
     int t, k;
     cin >> t;
     
+    // vector<string> v; 로도 가능
+    // v[i][j] -> 벡터의 i번째 문자열 -> 문자열의 j번째 문자
     vv gear(t, vector<int>(GEAR_MAX));
     vector<int> start_p(t,0);
     vector<int> rot(t,0);
